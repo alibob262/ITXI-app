@@ -1,0 +1,48 @@
+<mat-card class="auth-card signup-card">
+    <div class="card-header">
+      <mat-card-title class="card-title">Create Account</mat-card-title>
+      <p class="card-subtitle">Join us today</p>
+    </div>
+    
+    <form (ngSubmit)="signUp()" class="auth-form">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Email Address</mat-label>
+        <input matInput type="email" [(ngModel)]="email" name="email" required email>
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error>Please enter a valid email address</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-hint>At least 8 characters</mat-hint>
+        <mat-error>Password is required</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput [type]="hideConfirmPassword ? 'password' : 'text'" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+        <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword" type="button">
+          <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error>Please confirm your password</mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="accent" type="submit" class="submit-button">
+        <span>Create Account</span>
+        <mat-icon>person_add</mat-icon>
+      </button>
+    </form>
+  
+    <div *ngIf="errorMessage" class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+  
+    <div class="auth-footer">
+      <p>Already have an account? <a routerLink="/login" class="auth-link">Sign in here</a></p>
+    </div>
+  </mat-card>
