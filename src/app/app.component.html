@@ -4,8 +4,12 @@
     <div class="header-content">
       <span class="logo">ITXI</span>
       <nav class="nav-links">
-        <a mat-button routerLink="/login" class="nav-link">Login</a>
-        <a mat-button routerLink="/signup" class="nav-link">Sign Up</a>
+        <a *ngIf="!auth.isAuthenticated()" mat-button routerLink="/login" class="nav-link">Login</a>
+        <a *ngIf="!auth.isAuthenticated()" mat-button routerLink="/signup" class="nav-link">Sign Up</a>
+        <button *ngIf="auth.isAuthenticated()" mat-button (click)="logout()" class="nav-link">
+          <mat-icon>logout</mat-icon>
+          Logout
+        </button>
       </nav>
     </div>
   </mat-toolbar>

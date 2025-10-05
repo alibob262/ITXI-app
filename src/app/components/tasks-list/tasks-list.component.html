@@ -1,0 +1,186 @@
+<mat-card class="tasks-card">
+    <div class="card-header">
+      <h1 class="card-title">
+        <mat-icon class="title-icon">task_alt</mat-icon>
+        Tasks
+        <span class="task-count" *ngIf="filtered().length > 0">
+          ({{ filtered().length }})
+        </span>
+      </h1>
+    </div>
+  
+    <div class="toolbar">
+      <div class="search-section">
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Search tasks</mat-label>
+          <input 
+            matInput 
+            [ngModel]="q()" 
+            (ngModelChange)="q.set($event)"
+            placeholder="Search by title or notes..."
+          >
+          <button 
+            mat-icon-button 
+            matSuffix 
+            *ngIf="q()" 
+            (click)="q.set('')"
+            class="clear-button"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+          <mat-icon matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+  
+      <div class="controls-section">
+        <mat-button-toggle-group 
+          [value]="show()" 
+          (change)="show.set($event.value)"
+          class="filter-toggle"
+        >
+          <mat-button-toggle value="all" class="toggle-option">
+            <mat-icon>all_inclusive</mat-icon>
+            All
+          </mat-button-toggle>
+          <mat-button-toggle value="open" class="toggle-option">
+            <mat-icon>radio_button_unchecked</mat-icon>
+            Open
+          </mat-button-toggle>
+          <mat-button-toggle value="done" class="toggle-option">
+            <mat-icon>check_circle</mat-icon>
+            Done
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+  
+        <mat-form-field appearance="outline" class="sort-field">
+          <mat-label>Sort by</mat-label>
+          <mat-select [ngModel]="sortBy()" (ngModelChange)="sortBy.set($event)">
+            <mat-option value="created">
+              <div class="sort-option">
+                <!-- <mat-icon>schedule</mat-icon> -->
+                Created Date
+              </div>
+            </mat-option>
+            <mat-option value="due">
+              <div class="sort-option">
+                <!-- <mat-icon>event</mat-icon> -->
+                Due Date
+              </div>
+            </mat-option>
+            <mat-option value="priority">
+              <div class="sort-option">
+                <!-- <mat-icon>flag</mat-icon> -->
+                Priority
+              </div>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <button 
+          mat-flat-button 
+          color="primary" 
+          (click)="openCreate()"
+          class="add-button"
+        >
+          <mat-icon>add</mat-icon>
+          Add Task
+        </button>
+      </div>
+    </div>
+  
+    <mat-progress-bar 
+      *ngIf="svc.loading()" 
+      mode="indeterminate"
+      class="progress-bar"
+    ></mat-progress-bar>
+  
+    <div class="tasks-container" *ngIf="filtered().length; else emptyState">
+      <mat-list class="tasks-list">
+        <mat-list-item 
+          *ngFor="let t of filtered()" 
+          class="task-item"
+          [class.task-done]="t.done"
+        >
+          <div class="task-content">
+            <mat-checkbox 
+              [checked]="t.done" 
+              (change)="toggle(t)"
+              color="primary"
+              class="task-checkbox"
+            ></mat-checkbox>
+            
+            <div class="task-details">
+              <div class="task-header">
+                <span class="task-title" [class.strikethrough]="t.done">
+                  {{ t.title }}
+                </span>
+                <div class="task-badges">
+                  <span 
+                    class="priority-badge" 
+                    [class]="'priority-' + (t.priority || 'low')"
+                  >
+                    <mat-icon class="badge-icon">
+                      {{ getPriorityIcon(t.priority) }}
+                    </mat-icon>
+                    {{ (t.priority || 'low') | titlecase }}
+                  </span>
+                  <span 
+                    class="due-badge" 
+                    *ngIf="t.dueAt"
+                    [class.overdue]="isOverdue(t.dueAt)"
+                  >
+                    <mat-icon class="badge-icon">event</mat-icon>
+                    {{ t.dueAt | date:'MMM d' }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="task-meta" *ngIf="t.notes">
+                <mat-icon class="meta-icon">notes</mat-icon>
+                <span class="task-notes">{{ t.notes }}</span>
+              </div>
+              
+              <div class="task-footer">
+                <span class="created-date">
+                  Created {{ t.createdAt | date:'MMM d, y' }}
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <button 
+            mat-icon-button 
+            color="warn" 
+            (click)="remove(t)"
+            class="delete-button"
+            matTooltip="Delete task"
+          >
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  
+    <ng-template #emptyState>
+      <div class="empty-state">
+        <div class="empty-icon">
+          <mat-icon>inbox</mat-icon>
+        </div>
+        <h3 class="empty-title">
+          {{ q() ? 'No tasks found' : 'No tasks yet' }}
+        </h3>
+        <p class="empty-description">
+          {{ q() ? 'Try adjusting your search criteria' : 'Get started by creating your first task' }}
+        </p>
+        <button 
+          mat-stroked-button 
+          color="primary" 
+          (click)="openCreate()"
+          class="empty-action"
+        >
+          <mat-icon>add</mat-icon> 
+          {{ q() ? 'Clear search' : 'Create your first task' }}
+        </button>
+      </div>
+    </ng-template>
+  </mat-card>

@@ -35,7 +35,7 @@ export class LoginComponent {
 
   login() {
     this.authService.signIn(this.email, this.password).then(() => {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/tasks']);
     }).catch((error) => {
       this.errorMessage = error.message;
     });

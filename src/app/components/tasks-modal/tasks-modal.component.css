@@ -1,0 +1,238 @@
+:host {
+    --bg: #ffffff;
+    --bg-container: rgba(0, 0, 0, 0.4);
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --radius: 12px;
+    --transition: all 0.2s ease-in-out;
+  }
+  
+  .dialog-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    background: var(--bg-container);
+    backdrop-filter: blur(4px);
+    z-index: 1000;
+    animation: fadeIn 0.2s ease-out;
+  }
+  
+  .dialog {
+    width: min(560px, 100%);
+    background: var(--bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+  }
+  
+  .dialog-header {
+    padding: 24px 24px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .title-icon {
+    color: #3b82f6;
+    font-size: 28px;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .dialog-content {
+    padding: 24px;
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+  
+  .form-field {
+    width: 100%;
+  }
+  
+  .priority-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  
+  .priority-option.low::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #10b981;
+  }
+  
+  .priority-option.medium::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #f59e0b;
+  }
+  
+  .priority-option.high::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ef4444;
+  }
+  
+  .dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--border);
+    background: #f9fafb;
+  }
+  
+  .action-button {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 100px;
+    transition: var(--transition);
+  }
+  
+  .save-button:not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 640px) {
+    .dialog-container {
+      padding: 12px;
+    }
+    
+    .dialog-header {
+      padding: 20px 20px 0;
+    }
+    
+    .title {
+      font-size: 1.25rem;
+      gap: 8px;
+    }
+    
+    .title-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+    
+    .dialog-content {
+      padding: 20px;
+    }
+    
+    .form-row {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    
+    .dialog-actions {
+      padding: 16px 20px;
+      flex-direction: column-reverse;
+    }
+    
+    .action-button {
+      min-width: auto;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .dialog-header {
+      padding: 16px 16px 0;
+    }
+    
+    .dialog-content {
+      padding: 16px;
+    }
+    
+    .fields {
+      gap: 16px;
+    }
+    
+    .dialog-actions {
+      padding: 16px;
+    }
+  }
+  
+  /* Animation keyframes */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  
+  
+  /* Scrollbar styling for dialog content */
+  .dialog-content::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .dialog-content::-webkit-scrollbar-track {
+    background: #f1f5f9;
+  }
+  
+  .dialog-content::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+  }
+  
+  .dialog-content::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }

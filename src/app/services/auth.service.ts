@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal, computed } from '@angular/core';
 import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from '@angular/fire/auth';
 import { User as AppUser } from '../interfaces/user.interface';
 
@@ -8,6 +8,7 @@ import { User as AppUser } from '../interfaces/user.interface';
 export class AuthService {
   private auth = inject(Auth);
   user = signal<AppUser | null>(null);
+  isAuthenticated = computed(() => !!this.user());
 
   constructor() {
     authState(this.auth).subscribe((user: User | null) => {

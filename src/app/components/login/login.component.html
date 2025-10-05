@@ -1,38 +1,38 @@
 <mat-card class="auth-card login-card">
-    <div class="card-header">
-      <mat-card-title class="card-title">Welcome Back</mat-card-title>
-      <p class="card-subtitle">Sign in to your account</p>
-    </div>
-    
-    <form (ngSubmit)="login()" class="auth-form">
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Email Address</mat-label>
-        <input matInput type="email" [(ngModel)]="email" name="email" required email>
-        <mat-icon matSuffix>email</mat-icon>
-        <mat-error>Please enter a valid email address</mat-error>
-      </mat-form-field>
-  
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label>Password</mat-label>
-        <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
-        <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
-          <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-error>Password is required</mat-error>
-      </mat-form-field>
-  
-      <button mat-raised-button color="accent" type="submit" class="submit-button">
-        <span>Sign In</span>
-        <mat-icon>arrow_forward</mat-icon>
+  <div class="card-header">
+    <mat-card-title class="card-title">Welcome Back</mat-card-title>
+    <p class="card-subtitle">Sign in to your account</p>
+  </div>
+
+  <form (ngSubmit)="login()" class="auth-form">
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Email Address</mat-label>
+      <input matInput type="email" [(ngModel)]="email" name="email" required email>
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error>Please enter a valid email address</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="form-field">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hidePassword ? 'password' : 'text'" [(ngModel)]="password" name="password" required>
+      <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" type="button">
+        <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
-    </form>
-  
-    <div *ngIf="errorMessage" class="error-message">
-      <mat-icon>error_outline</mat-icon>
-      <span>{{ errorMessage }}</span>
-    </div>
-  
-    <div class="auth-footer">
-      <p>Don't have an account? <a routerLink="/signup" class="auth-link">Create one here</a></p>
-    </div>
-  </mat-card>
+      <mat-error>Password is required</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="submit-button">
+      <span>Sign In</span>
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">
+    <mat-icon>error_outline</mat-icon>
+    <span>{{ errorMessage }}</span>
+  </div>
+
+  <div class="auth-footer">
+    <p>Don't have an account? <a routerLink="/signup" class="auth-link">Create one here</a></p>
+  </div>
+</mat-card>

@@ -1,113 +1,130 @@
-.auth-card {
-    max-width: 420px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 40px 30px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    background: white;
+:host {
+  --bg: #ffffff;
+  --text-dark: #1f2937;
+  --text-muted: #6b7280;
+  --primary-1: #6c63ff;
+  --primary-2: #7b5cf7;
+  --accent: #ff8a4c;
+  --error: #d14343;
+  --error-bg: #fbeaea;
+  --divider: #e5e7eb;
+  --shadow-1: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-2: 0 6px 20px rgba(108, 99, 255, 0.30);
+}
+
+.auth-card.signup-card {
+  max-width: 420px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+  background: var(--bg);
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card-title {
+  color: var(--text-dark);
+  font-size: 28px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.15;
+}
+
+.card-subtitle {
+  color: var(--text-muted);
+  font-size: 16px;
+  margin: 0;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-field {
+  width: 100%;
+}
+
+/* Submit button */
+.submit-button {
+  height: 48px;
+  border-radius: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  background: linear-gradient(135deg, var(--primary-1) 0%, var(--primary-2) 100%);
+  color: #ffffff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 18px;
+  border: none;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+}
+
+.submit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+  filter: saturate(1.05);
+}
+
+.submit-button:focus-visible {
+  outline: 3px solid rgba(108, 99, 255, 0.35);
+  outline-offset: 2px;
+}
+
+/* Error */
+.error-message {
+  background-color: var(--error-bg);
+  color: var(--error);
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin: 20px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 4px solid var(--error);
+}
+
+/* Footer */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: 1px solid var(--divider);
+}
+
+.auth-footer p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.auth-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color .2s ease, text-decoration-color .2s ease;
+}
+
+.auth-link:hover {
+  color: #ff7a33;
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .auth-card.signup-card {
+    margin: 0 15px;
+    padding: 30px 20px;
   }
-  
-  .card-header {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  .card-title {
-    color: #333333;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  
-  .card-subtitle {
-    color: #666;
-    font-size: 16px;
-    margin: 0;
-  }
-  
-  .auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .form-field {
-    width: 100%;
-  }
-  
-  .submit-button {
-    height: 48px;
-    border-radius: 24px;
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 10px;
-    background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
-    color: #333;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-  }
-  
-  .submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
-  }
-  
-  .submit-button:active {
-    transform: translateY(0);
-  }
-  
-  .error-message {
-    background-color: #ffebee;
-    color: #c62828;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border-left: 4px solid #c62828;
-  }
-  
-  .auth-footer {
-    text-align: center;
-    margin-top: 25px;
-    padding-top: 25px;
-    border-top: 1px solid #e0e0e0;
-  }
-  
-  .auth-footer p {
-    color: #666;
-    margin: 0;
-  }
-  
-  .auth-link {
-    color: #673AB7;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  .auth-link:hover {
-    color: #512DA8;
-    text-decoration: underline;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 480px) {
-    .auth-card {
-      margin: 0 15px;
-      padding: 30px 20px;
-    }
-    
-    .card-title {
-      font-size: 24px;
-    }
-    
-    .card-subtitle {
-      font-size: 14px;
-    }
-  }
+
+  .card-title { font-size: 24px; }
+  .card-subtitle { font-size: 14px; }
+}

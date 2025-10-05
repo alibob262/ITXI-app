@@ -42,7 +42,7 @@ export class SignupComponent {
     }
 
     this.authService.signUp(this.email, this.password).then(() => {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/tasks']);
     }).catch((error) => {
       this.errorMessage = error.message;
     });
